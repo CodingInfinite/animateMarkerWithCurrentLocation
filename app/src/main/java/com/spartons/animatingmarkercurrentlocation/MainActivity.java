@@ -126,9 +126,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void showMarker(@NonNull Location currentLocation) {
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        if (currentLocationMarker != null)
-            currentLocationMarker.remove();
-        currentLocationMarker = googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker()).position(latLng));
+        if (currentLocationMarker == null)
+            currentLocationMarker = googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker()).position(latLng));      
+        else
+            MarkerAnimation.animateMarkerToGB(currentLocationMarker, latLng, LatLngInterpolator.Spherical());
     }
 
     @Override
